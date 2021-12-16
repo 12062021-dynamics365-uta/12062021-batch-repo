@@ -20,7 +20,6 @@ namespace Rock_Paper_Scissors_Demo1
 			{
 				logout = false;
 				Console.WriteLine("Hello. Welcome to Rock-Paper-Scissors Game!");
-
 				Console.WriteLine("To Log in, What is your First Name?");
 				string userFName = Console.ReadLine();
 				Console.WriteLine("What is your Last Name?");
@@ -28,13 +27,13 @@ namespace Rock_Paper_Scissors_Demo1
 
 				// log in the player
 				game.Login(userFName, userLName);
-				game.StartNewGame();
 				//loop here till one player has won 2
 				//call the WinnerYet method to see i there's a
 				//
 				bool playAgain = true;
 				do
 				{
+					game.StartNewGame();
 					while (game.WinnerYet() == null)
 					{
 						//get user choice and validate
@@ -53,20 +52,31 @@ namespace Rock_Paper_Scissors_Demo1
 						computerChoice = game.GetComputerChoice();
 						Console.WriteLine($"The computers choice is {computerChoice}");
 						Player roundWinner = game.PlayRound(computerChoice, userChoice);
-						//have this try catch for when there is no round winner and the Fname/Lname lfields are NULL.
-						try
-						{
+                        //have this try catch for when there is no round winner and the Fname/Lname lfields are NULL.
+
+                        //verify that there is a winner to avoid an Excdeption
+                        if (roundWinner.Fname != null)
+                        {
 							Console.WriteLine($"The winner of this round is {roundWinner.Fname} {roundWinner.Lname}");
 						}
-						catch (SystemException ex)
-						{
+                        else
+                        {
 							Console.WriteLine("This round was a tie");
-							//Console.WriteLine($"Congrats! This is the SystemException class. => {ex.Message}");
 						}
-						catch (Exception ex)
-						{
-							Console.WriteLine($"An unknown exception was thrown in Program.cs try/catch => {ex.Message}");
-						}
+
+						//try
+						//{
+						//	Console.WriteLine($"The winner of this round is {roundWinner.Fname} {roundWinner.Lname}");
+						//}
+						//catch (SystemException ex)
+						//{
+						//	Console.WriteLine("This round was a tie");
+						//	//Console.WriteLine($"Congrats! This is the SystemException class. => {ex.Message}");
+						//}
+						//catch (Exception ex)
+						//{
+						//	Console.WriteLine($"An unknown exception was thrown in Program.cs try/catch => {ex.Message}");
+						//}
 						//the finally block ALWAYS runs!!!
 						//              finally
 						//              {
@@ -75,8 +85,7 @@ namespace Rock_Paper_Scissors_Demo1
 					}
 
 					//Player gameWinner = game.GetWinnerOfLastGame();
-
-					Console.WriteLine($"The game is over.");
+					Console.WriteLine($"\t\tThe game is over.");
 					Console.WriteLine($"The computer won {game.GetComputerWins()} games.");
 					Console.WriteLine($"You won {game.GetUserWins()} games.");
 					Console.WriteLine($"There were {game.GetTies()} ties.");
@@ -84,7 +93,7 @@ namespace Rock_Paper_Scissors_Demo1
 					Console.WriteLine($"Would you like to play again?\nEnter no if you don't want to play again.\nOtherwise, do anything else.");
 					string playAgainInput = Console.ReadLine();
 					
-					game.ResetGame();
+					
 
 					if (playAgainInput.ToLower().Equals("no"))//method chaining
 					{
@@ -92,7 +101,7 @@ namespace Rock_Paper_Scissors_Demo1
 						logout = true;
 					}
 				} while (playAgain);
-
+				game.ResetGame();
 				//loop to log someone else in HERE
 			} while (logout);
 		}//EoMain
