@@ -45,13 +45,9 @@ namespace Rock_Paper_Scissors_Demo1
         internal void Login(string userFName, string userLName)
         {
             //throw new NotImplementedException("Hey, dinkus... make a body for game.login()");
-           
             //foreach (Player p in players)
             //{
-            //    if (p.Fname == userFName && p.Lname == userLName)
-            //    {
-            //        this.currentLoggedInPlayer = p;
-            //    }
+            //    if (p.Fname == userFName && p.Lname == userLName) this.currentLoggedInPlayer = p;
             //}
 
             Player p = players.Where(p => p.Fname == userFName && p.Lname == userLName).FirstOrDefault();
@@ -61,7 +57,44 @@ namespace Rock_Paper_Scissors_Demo1
                 Player p1 = new Player(userFName, userLName);
                 this.currentLoggedInPlayer = p1;
                 players.Add(p1);
+                //this.currentGame.Player2 = p1;
             }
+            else
+            {
+                this.currentLoggedInPlayer = p;
+            }
+        }
+        /// <summary>
+        /// This method will create a new game with the 
+        /// currentLoggedinPlayer as P2 and the computer as P1.
+        /// </summary>
+        public void StartNewGame()
+        {
+            this.currentGame = new Game();
+            // create the computer
+            Player comp = players.Where(p => p.Fname == "Max" && p.Lname == "HeadRoom").FirstOrDefault();
+            if (comp == null)
+            {
+                Player comp1 = new Player("Max", "HeadRoom");
+                this.players.Add(comp1);
+                this.currentGame.Player1 = comp1;
+                this.currentGame.Player2 = this.currentLoggedInPlayer;
+            }
+            else
+            {
+                this.currentGame.Player1 = comp;
+                this.currentGame.Player2 = this.currentLoggedInPlayer;
+            }
+        }
+
+        /// <summary>
+        /// This method will set the currentloggedinplayer and current game to null.
+        /// ready to start another game.
+        /// </summary>
+        internal void ResetGame()
+        {
+            this.currentGame = null;
+            this.currentLoggedInPlayer = null;
         }
 
         /// <summary>
@@ -108,6 +141,7 @@ namespace Rock_Paper_Scissors_Demo1
             round.P2Choice = p2Choice;
             currentGame.Rounds.Add(round);
 
+            // all the ways that the user wins.
             if (((int)p1Choice == 1 && p2Choice == Choice.Paper) || 
                 ((int)p1Choice == 2 && p2Choice == Choice.Scissors) || 
                 ((int)p1Choice == 3 && p2Choice == Choice.Rock))
@@ -119,6 +153,7 @@ namespace Rock_Paper_Scissors_Demo1
             else if (p1Choice == p2Choice)
             {
                 //Console.WriteLine("This round was a tie.\n");
+                round.Winner = null;
                 return null;
             }
             else
@@ -135,18 +170,32 @@ namespace Rock_Paper_Scissors_Demo1
         /// <returns></returns>
         public Player WinnerYet()
         {
-            //iterate over hte Rounds List while keeping track of who won each round
-            if (currentGame.Rounds.Count <2) return null;
+            //iterate over the Rounds List while keeping track of who won each round
+            if (this.currentGame.Rounds.Count()<2) return null;// there can't be a winner yet if there are less than 2 rounds total.
             int p1RoundWins = 0;
             int p2RoundWins = 0;
 
-            foreach (Round r in currentGame.Rounds)
+            foreach (Round r in this.currentGame.Rounds)
             {
-                if(r.Winner == currentGame.Player1)p1RoundWins++;
-                if (r.Winner == currentGame.Player2) p2RoundWins++;
+                if(r.Winner == this.currentGame.Player1) p1RoundWins++;
+                if (r.Winner == this.currentGame.Player2) p2RoundWins++;
             }
-            if (p1RoundWins == 2) return currentGame.Player1;
-            if (p2RoundWins == 2) return currentGame.Player2;
+            if (p1RoundWins == 2)
+            {
+                //store the game in the List<Game>
+                games.Add(this.currentGame);
+                Player p = this.currentGame.Player1;
+                //this.currentGame = null;
+                return p;
+            }
+            if (p2RoundWins == 2)
+            {
+                //store the game in the List<Game>
+                games.Add(this.currentGame);
+                Player p = currentGame.Player2;
+                //this.currentGame = null;
+                return p;
+            }
             return null;
         }
 
@@ -159,13 +208,9 @@ namespace Rock_Paper_Scissors_Demo1
             int compWins = 0;
             foreach (Round r in currentGame.Rounds)
             {
-                if (r.Winner == r.Player1)
-                {
-                    compWins++;
-                }
+                if (r.Winner == r.Player1) compWins++;
             }
             return compWins;
-
         }
 
         /// <summary>
@@ -177,10 +222,7 @@ namespace Rock_Paper_Scissors_Demo1
             int userWins = 0;
             foreach (Round r in currentGame.Rounds)
             {
-                if (r.Winner == r.Player2)
-                {
-                    userWins++;
-                }
+                if (r.Winner == r.Player2) userWins++;
             }
             return userWins;
         }
@@ -194,10 +236,7 @@ namespace Rock_Paper_Scissors_Demo1
             int ties = 0;
             foreach (Round r in currentGame.Rounds)
             {
-                if (r.Winner == null)
-                {
-                    ties++;
-                }
+                if (r.Winner == null) ties++;
             }
             return ties;
         }
@@ -206,18 +245,10 @@ namespace Rock_Paper_Scissors_Demo1
         /// This method returns how many rounds wer played in the current, completed, game
         /// </summary>
         /// <returns></returns>
-        internal int GetNumRounds()
+        public int GetNumRounds()
         {
-            return currentGame.Rounds.Count;
+            return this.currentGame.Rounds.Count();
         }
-
-
-
-
-
-
-
-
 
     }//EoC
 }//EoN
