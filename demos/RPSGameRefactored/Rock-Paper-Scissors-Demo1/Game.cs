@@ -10,7 +10,6 @@ namespace Rock_Paper_Scissors_Demo1
     {
         public Player Player1 { get; set; }
         public Player Player2 { get; set; }
-
         public List<Round> Rounds = new List<Round>();
 
 

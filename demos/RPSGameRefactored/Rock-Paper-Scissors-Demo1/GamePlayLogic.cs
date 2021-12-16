@@ -61,7 +61,44 @@ namespace Rock_Paper_Scissors_Demo1
                 Player p1 = new Player(userFName, userLName);
                 this.currentLoggedInPlayer = p1;
                 players.Add(p1);
+                //this.currentGame.Player2 = p1;
             }
+            else
+            {
+                this.currentLoggedInPlayer = p;
+            }
+        }
+        /// <summary>
+        /// THis method will create a new game with the 
+        /// currentLoggedinPlayer as P2 and the computer as P1.
+        /// </summary>
+        public void StartNewGame()
+        {
+            this.currentGame = new Game();
+            // create the computer
+            Player comp = players.Where(p => p.Fname == "Max" && p.Lname == "HeadRoom").FirstOrDefault();
+            if (comp == null)
+            {
+                Player comp1 = new Player("Max", "HeadRoom");
+                this.players.Add(comp1);
+                this.currentGame.Player1 = comp1;
+                this.currentGame.Player2 = this.currentLoggedInPlayer;
+            }
+            else
+            {
+                this.currentGame.Player1 = comp;
+                this.currentGame.Player2 = this.currentLoggedInPlayer;
+            }
+        }
+
+        /// <summary>
+        /// This method will set the currentloggedinplayer and current game to null.
+        /// ready to start another game.
+        /// </summary>
+        internal void ResetGame()
+        {
+            this.currentGame = null;
+            this.currentLoggedInPlayer = null;
         }
 
         /// <summary>
@@ -108,6 +145,7 @@ namespace Rock_Paper_Scissors_Demo1
             round.P2Choice = p2Choice;
             currentGame.Rounds.Add(round);
 
+            // all the ways that the user wins.
             if (((int)p1Choice == 1 && p2Choice == Choice.Paper) || 
                 ((int)p1Choice == 2 && p2Choice == Choice.Scissors) || 
                 ((int)p1Choice == 3 && p2Choice == Choice.Rock))
@@ -135,18 +173,33 @@ namespace Rock_Paper_Scissors_Demo1
         /// <returns></returns>
         public Player WinnerYet()
         {
-            //iterate over hte Rounds List while keeping track of who won each round
-            if (currentGame.Rounds.Count <2) return null;
+            //if(g != null) this.currentGame = g;
+            //iterate over the Rounds List while keeping track of who won each round
+            if (currentGame.Rounds.Count() <2) return null;
             int p1RoundWins = 0;
             int p2RoundWins = 0;
 
             foreach (Round r in currentGame.Rounds)
             {
-                if(r.Winner == currentGame.Player1)p1RoundWins++;
+                if(r.Winner == currentGame.Player1) p1RoundWins++;
                 if (r.Winner == currentGame.Player2) p2RoundWins++;
             }
-            if (p1RoundWins == 2) return currentGame.Player1;
-            if (p2RoundWins == 2) return currentGame.Player2;
+            if (p1RoundWins == 2)
+            {
+                //store the game in the List<Game>
+                games.Add(this.currentGame);
+                Player p = currentGame.Player1;
+                //this.currentGame = null;
+                return p;
+            }
+            if (p2RoundWins == 2)
+            {
+                //store the game in the List<Game>
+                games.Add(this.currentGame);
+                Player p = currentGame.Player2;
+                //this.currentGame = null;
+                return p;
+            }
             return null;
         }
 
@@ -211,6 +264,16 @@ namespace Rock_Paper_Scissors_Demo1
             return currentGame.Rounds.Count;
         }
 
+        /// <summary>
+        /// THis method will grab the last game played and calculate the winner.
+        /// </summary>
+        /// <returns></returns>
+        //public Player GetWinnerOfLastGame()
+        //{
+        //    Game lastGame = games.Last();
+        //    Player winnerOfLastGame = this.WinnerYet(lastGame);
+        //    return winnerOfLastGame;
+        //}
 
 
 
