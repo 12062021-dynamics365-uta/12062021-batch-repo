@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Rock_Paper_Scissors_Demo1
 {
@@ -16,7 +17,7 @@ namespace Rock_Paper_Scissors_Demo1
 			bool logout = false;
 			GamePlayLogic game = new GamePlayLogic();
 
-			do
+			do//this loop will run till the logged in person decided to log out.
 			{
 				logout = false;
 				Console.WriteLine("Hello. Welcome to Rock-Paper-Scissors Game!");
@@ -27,10 +28,40 @@ namespace Rock_Paper_Scissors_Demo1
 
 				// log in the player
 				game.Login(userFName, userLName);
-				//loop here till one player has won 2
-				//call the WinnerYet method to see i there's a
-				//
+
+				//give the choice to play a game of print our theri game history.
+				Console.WriteLine("\tPlease choose what you want to do.");
+
+				do
+				{
+					Console.WriteLine("\n\tEnter 1 to play a game.\n\tEnter 2 to see a history of your games played.\n\tEnter 3 to Quit");
+					string menuChoice = Console.ReadLine(); 
+					userChoice = game.ValidateUserChoice(menuChoice);
+					if (userChoice == Choice.invalid)
+					{
+						Console.WriteLine("Hey, buddy...that wasn't a 1 or 2 or 3!");
+					}
+				
+
+					switch (userChoice)
+					{
+						case Choice.Rock:
+							break;
+						case Choice.Paper:// call PrintUsersGames() to get a list of games played
+							List<Game> usersGames = game.PrintUsersGames();
+							//call method below to print out details of the games
+							PrintUsersGames1(usersGames);
+							break;
+						case Choice.Scissors:
+							Environment.Exit(1);
+							break;
+						Defult:
+							Console.WriteLine("This is the default in the switch statement");
+					}
+				} while (userChoice == Choice.invalid);
+				//loop here till one player has won 2 rounds
 				bool playAgain = true;
+				userChoice = Choice.invalid;
 				do
 				{
 					game.StartNewGame();
@@ -44,7 +75,7 @@ namespace Rock_Paper_Scissors_Demo1
 							userChoice = game.ValidateUserChoice(userInput);
 							if (userChoice == Choice.invalid)
 							{
-								Console.WriteLine("Hey, buddy... that wasn't a 1 or 2 or 3!");
+								Console.WriteLine("Hey, buddy...that wasn't a 1 or 2 or 3!");
 							}
 						} while (userChoice == Choice.invalid);
 
@@ -55,7 +86,7 @@ namespace Rock_Paper_Scissors_Demo1
                         //have this try catch for when there is no round winner and the Fname/Lname lfields are NULL.
 
                         //verify that there is a winner to avoid an Excdeption
-                        if (roundWinner.Fname != null)
+                        if (roundWinner != null)
                         {
 							Console.WriteLine($"The winner of this round is {roundWinner.Fname} {roundWinner.Lname}");
 						}
@@ -63,7 +94,7 @@ namespace Rock_Paper_Scissors_Demo1
                         {
 							Console.WriteLine("This round was a tie");
 						}
-
+						#region
 						//try
 						//{
 						//	Console.WriteLine($"The winner of this round is {roundWinner.Fname} {roundWinner.Lname}");
@@ -82,10 +113,11 @@ namespace Rock_Paper_Scissors_Demo1
 						//              {
 						//Console.WriteLine("This is the finally block");
 						//              }
+						#endregion
+
 					}
 
-					//Player gameWinner = game.GetWinnerOfLastGame();
-					Console.WriteLine($"\t\tThe game is over.");
+                    Console.WriteLine($"\t\tThe game is over.");
 					Console.WriteLine($"The computer won {game.GetComputerWins()} games.");
 					Console.WriteLine($"You won {game.GetUserWins()} games.");
 					Console.WriteLine($"There were {game.GetTies()} ties.");
@@ -93,8 +125,6 @@ namespace Rock_Paper_Scissors_Demo1
 					Console.WriteLine($"Would you like to play again?\nEnter no if you don't want to play again.\nOtherwise, do anything else.");
 					string playAgainInput = Console.ReadLine();
 					
-					
-
 					if (playAgainInput.ToLower().Equals("no"))//method chaining
 					{
 						playAgain = false;
@@ -106,6 +136,29 @@ namespace Rock_Paper_Scissors_Demo1
 			} while (logout);
 		}//EoMain
 
-
+		public static void PrintUsersGames1(List<Game> games)
+        {
+			int counter = 0;
+			Console.WriteLine($"There are {games.Count} games in your history ");
+			foreach (Game game in games)
+            {
+				counter++;
+				Console.WriteLine($"This game {counter}.");
+				Console.WriteLine($"This game was between {game.Player1.Fname} {game.Player1.Lname} and {game.Player2.Fname} {game.Player2.Lname}.");
+                //loop over the rounds. printing the choices.
+				
+                foreach (Round r in game.Rounds)
+                {
+                    if (r.Winner != null)
+                    {
+						Console.WriteLine($"\tThe computer played {r.Player1} and you played {r.Player2} so {r.Winner.Fname} won. ");
+					}
+                    else
+                    {
+						Console.WriteLine($"\tThe computer played {r.Player1} and you played {r.Player2} so no one won. ");
+                    }
+				}
+			}
+		}
 	}//EoC
 }//EoN

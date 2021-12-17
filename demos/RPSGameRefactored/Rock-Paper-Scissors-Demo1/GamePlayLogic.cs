@@ -35,6 +35,12 @@ namespace Rock_Paper_Scissors_Demo1
             currentGame.Player2 = player;
         }
 
+        internal List<Game> PrintUsersGames()
+        {
+            return games.Where(x => x.Player2.Fname == this.currentLoggedInPlayer.Fname 
+            && x.Player2.Lname == this.currentLoggedInPlayer.Lname).ToList();
+        }
+
         /// <summary>
         /// This method will see if the loggin in user already exists
         /// if so, will assign that player to currentLoggedInPlayer
@@ -98,9 +104,8 @@ namespace Rock_Paper_Scissors_Demo1
         }
 
         /// <summary>
-        /// This method validates the choice that the user made adn that 
-        /// it is a 1, 2, or 3..
-        /// returns Choice.invalid if not.
+        /// This method validates that the choice that the user made was a 1, 2, or 3.
+        /// Returns Choice.invalid if not.
         /// </summary>
         /// <param name="choice"></param>
         /// <returns></returns>
@@ -165,13 +170,13 @@ namespace Rock_Paper_Scissors_Demo1
         }
 
         /// <summary>
-        /// THis method iterates over game.Rounds to see is ther is a winner yet.
+        /// This method iterates over currentGame.Rounds to see is ther is a winner yet.
         /// </summary>
         /// <returns></returns>
         public Player WinnerYet()
         {
             //iterate over the Rounds List while keeping track of who won each round
-            if (this.currentGame.Rounds.Count()<2) return null;// there can't be a winner yet if there are less than 2 rounds total.
+            if (this.currentGame.Rounds.Count<2) return null;// there can't be a winner yet if there are less than 2 rounds total.
             int p1RoundWins = 0;
             int p2RoundWins = 0;
 
@@ -247,7 +252,7 @@ namespace Rock_Paper_Scissors_Demo1
         /// <returns></returns>
         public int GetNumRounds()
         {
-            return this.currentGame.Rounds.Count();
+            return this.currentGame.Rounds.Count;
         }
 
     }//EoC
