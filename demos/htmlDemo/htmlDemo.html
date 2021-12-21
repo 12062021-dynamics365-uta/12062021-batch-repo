@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marks Demo</title>
+</head>
+
+<body>
+  Hello, Mark's Batch!!! <br> This is a paragraph!!!
+  <p style="border-color: black;
+    border-style: solid;
+    border-width: 5px;">
+    This is
+    <!-- inline styling -->
+  <div style="border-color: black;
+    border-style: solid;
+    border-width: 5px;">a bold</div>
+  paragraph!!!
+  </p>
+
+  <!-- nested elements -->
+  <p>this is the first part
+    <span>Hello, Mark's Batch!!!</span>
+    and <a style="color:rgb(32, 241, 119)" href="https://revature.com/">Revature HERE</a> this is the second part of the
+    paragraph.
+  </p>
+
+  <!-- There 6 different 'block-level' tags.  -->
+  <h6>This is a 'heading' element. There are 6 of them.</h6>
+  <h5>This is a 'heading' element. There are 6 of them.</h5>
+  <h4>This is a 'heading' element. There are 6 of them.</h4>
+  <h3>This is a 'heading' element. There are 6 of them.</h3>
+  <h2>This is a 'heading' element. There are 6 of them.</h2>
+  <h1>This is a 'heading' element. There are 6 of them.</h1>
+
+  <!-- you can add "global" attributes to allow CSS or JS to select specific elements. -->
+  <h3 class="h3Class">This is an H3</h3>
+  <p id="h3Id">This is an H3</p>
+  <h1 style="color:rgb(32, 241, 119)">This is a green H3</h1>
+  <div title="this is a title!!!">I want more info on this element!</div>
+
+  <img src="/images/MayaInPark.jpg" style="height: 200px;" alt="The image wasn't found.">
+
+  <!-- there are 2 types pf lists.  -->
+  <!-- Ordered List -->
+  <ol>
+    <li>This is the first item</li>
+    <li>This is the second item</li>
+    <li>This is the third item</li>
+    <ol>
+      <li>This is the first item</li>
+      <li>This is the second item</li>
+      <li>This is the third item</li>
+    </ol>
+  </ol>
+
+  <!-- unordered list -->
+  <ul style="list-style-type:lower-roman">
+    <li>This is the first item</li>
+    <li>This is the second item</li>
+    <li>This is the third item</li>
+    <ul>
+      <li>This is the first item</li>
+      <li>This is the second item</li>
+      <li>This is the third item</li>
+    </ul>
+  </ul>
+
+  <!-- create a  table! -->
+  <table style="border: solid blue 3px;">
+    <thead>
+      <th>Fname</th>
+      <th>Lname</th>
+      <th>Street Name</th>
+    </thead>
+    <tbody style="text-align: right;">
+      <tr>
+        <td>Mark</td>
+        <td>Moore</td>
+        <td>Rolling Hills</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Of Navareth</td>
+        <td>Bethlehem Road</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <form action="" method="get">
+    <label for="fname">First Name:</label>
+    <input autofocus type="text" id="fname" placeholder="put your first name here."><br>
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" placeholder="put your last name here."><br>
+    <input type="color" name="color" id="color">
+    <input type="button" value="Submit">
+
+
+    <select name="Favorite Colors" id="faveColors">
+      <option value="blue">Blue</option>
+      <option value="red" selected>Red</option>
+      <option value="green">Green</option>
+    </select>
+  </form>
+
+  <!-- character codes for symbols and such.... -->
+  <p>Just Do It&trade;</p>
+  <p>50&lt;51</p>
+  <p>March 4th is &#x213c; day!!</p>
+
+
+
+
+  <br>
+
+
+
+
+
+</body>
+
+</html>
