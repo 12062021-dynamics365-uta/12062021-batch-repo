@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Rock_Paper_Scissors_Demo1
 {
-    public class GamePlayLogic : RPS_Game
+    public class GamePlayLogic : IGamePlayLogic
     {
         List<Player> players;// all the registered players
         List<Game> games;// all the played games
         Random randNum;
         private Game currentGame;
         private Player currentLoggedInPlayer;
+        private readonly DataBaseAccess _dataBaseAccess;
 
         //constructor
         public GamePlayLogic()
@@ -20,6 +21,8 @@ namespace Rock_Paper_Scissors_Demo1
             players = new List<Player>();
             games = new List<Game>();
             randNum = new Random(); 
+            this._dataBaseAccess = new DataBaseAccess();
+
         }
         // overload constructor that is called as the first constructor or the first game after compilation
         public GamePlayLogic(string fname, string lname)
@@ -33,6 +36,15 @@ namespace Rock_Paper_Scissors_Demo1
             this.players.Add(player);// add the new player to the list of players
             currentGame.Player1 = computer;
             currentGame.Player2 = player;
+        }
+
+        internal List<Player> GetAllPlayers()
+        {
+            //List<Player> players = this._dataBaseAccess.GetAllPlayers();
+            List<Player> players = new List<Player> ();
+            players = this._dataBaseAccess.GetAllPlayers();
+            
+            return players;
         }
 
         internal List<Game> PrintUsersGames()
