@@ -28,6 +28,12 @@ namespace Rock_Paper_Scissors_Demo1
 
 				// log in the player
 				game.Login(userFName, userLName);
+				List<Player> players = game.GetAllPlayers();
+
+				foreach (Player p in players)
+                {
+					Console.WriteLine($"{p.PlayerId}\t{p.Fname}\t{p.Lname}\t{p.Wins}\t{p.Losses}.");
+                }
 
 				//give the choice to play a game of print our theri game history.
 				Console.WriteLine("\tPlease choose what you want to do.");
@@ -55,8 +61,9 @@ namespace Rock_Paper_Scissors_Demo1
 						case Choice.Scissors:
 							Environment.Exit(1);
 							break;
-						Defult:
+                        default:
 							Console.WriteLine("This is the default in the switch statement");
+							break;
 					}
 				} while (userChoice == Choice.invalid);
 				//loop here till one player has won 2 rounds
