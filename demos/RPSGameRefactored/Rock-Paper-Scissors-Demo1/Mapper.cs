@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Rock_Paper_Scissors_Demo1
 {
     //this class will hold the methods to map what is returned from the Db to a known object within the Application here.
-    internal class Mapper : IMapper
+    public class Mapper : IMapper
     {
         //I don't thiknk we need any variables or properties in this class...
 

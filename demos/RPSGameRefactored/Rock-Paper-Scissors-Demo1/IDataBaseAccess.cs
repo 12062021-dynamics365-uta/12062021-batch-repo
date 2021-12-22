@@ -1,6 +1,12 @@
-﻿namespace Rock_Paper_Scissors_Demo1
+﻿using System.Collections.Generic;
+
+namespace Rock_Paper_Scissors_Demo1
 {
-    internal interface IDataBaseAccess
+    public interface IDataBaseAccess
     {
+        List<Player> GetAllPlayers();
+
+
+
     }
 }

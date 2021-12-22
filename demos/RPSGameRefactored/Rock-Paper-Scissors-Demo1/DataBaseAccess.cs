@@ -9,19 +9,21 @@ namespace Rock_Paper_Scissors_Demo1
 {
     internal class DataBaseAccess : IDataBaseAccess
     {
+        // in readl life you dont want to keep your Cnn String here.... 
+        // it will be pushed t our GitHub and anyone could see it.
         private readonly string str = "Data source =MARKCMOORE\\SQLEXPRESS;initial Catalog=RpsGameDb; integrated security =true";
         private readonly SqlConnection _con;
         private readonly IMapper _mapper;
 
         //constructor
-        public DataBaseAccess()
+        public DataBaseAccess(IMapper mapper)
         {
             this._con = new SqlConnection(this.str);
             _con.Open();
-            this._mapper = new Mapper();
+            this._mapper = mapper;
         }
 
-        internal List<Player> GetAllPlayers()
+        public List<Player> GetAllPlayers()
         {
             string sqlQuery = "SELECT * FROM Players;";
             List<Player> players = new List<Player>();  

@@ -1,0 +1,92 @@
+body {
+  background-color: black;
+}
+
+/* .h3Class{
+  background-color: black;
+} */
+
+.h3Class{
+  width: 50%;
+}
+
+.h3Class2{
+  background-color: pink;
+}
+
+.hoverTextColorChange:hover{
+  color: red
+}
+
+a.visitedColorChange:visited{
+  color: rgb(255, 0, 34);
+}
+
+a.visitedColorChange{
+  color: black;
+}
+
+/* #firstWord::first-letter{
+  font-size: larger;
+  color: red;
+} */
+
+#firstLine::first-line{
+  /* font-size: larger; */
+  color: red;
+}
+
+/* the space selects all childfren, g-childre, etc, and applied the styling to it. */
+p .pClass{
+  border: 3px dotted black; /*the order is => thickness, style, color, */
+}
+
+/* this chooses the first child ONLY and applies the styliung to it. */
+h6 > div{
+  border: 3px dotted black;
+}
+
+/* use '!important' to override all other styling. */
+/* div{
+  border: 3px dotted red !important;
+
+} */
+
+
+.thClass ~ th{
+  color:blueviolet
+}
+
+#inlineDiv{
+  /* display: inline; */
+  display:none;
+}
+
+.inlineH5{
+  width: 100px;
+  display: inline;
+}
+
+.inlinewidthlimited{
+  width: 100px;
+}
+
+/* the position element give you the ability to control the position of
+an element.  */
+img{
+  position: absolute;
+  top:-50px;
+  left:-50px;
+  bottom: 200px;
+  right:200px
+}
+
+.cornersRounded{
+  border-radius: 10px;
+  margin:10px;
+  border: 10px solid #73AD21;
+  background: #73AD21;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
+}
