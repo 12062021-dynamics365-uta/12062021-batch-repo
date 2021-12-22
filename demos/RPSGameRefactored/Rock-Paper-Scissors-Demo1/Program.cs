@@ -15,7 +15,9 @@ namespace Rock_Paper_Scissors_Demo1
 			Choice computerChoice;
 			Choice userChoice = Choice.invalid;
 			bool logout = false;
-			GamePlayLogic game = new GamePlayLogic();
+			Mapper mapper = new Mapper();
+			DataBaseAccess dbAccess	= new DataBaseAccess(mapper);
+			GamePlayLogic game = new GamePlayLogic(dbAccess);
 
 			do//this loop will run till the logged in person decided to log out.
 			{
@@ -28,6 +30,8 @@ namespace Rock_Paper_Scissors_Demo1
 
 				// log in the player
 				game.Login(userFName, userLName);
+
+				//this wil jsut a test of the Db Connection.
 				List<Player> players = game.GetAllPlayers();
 
 				foreach (Player p in players)

@@ -13,15 +13,15 @@ namespace Rock_Paper_Scissors_Demo1
         Random randNum;
         private Game currentGame;
         private Player currentLoggedInPlayer;
-        private readonly DataBaseAccess _dataBaseAccess;
+        private readonly IDataBaseAccess _dataBaseAccess;
 
         //constructor
-        public GamePlayLogic()
+        public GamePlayLogic(IDataBaseAccess dba)
         {
             players = new List<Player>();
             games = new List<Game>();
-            randNum = new Random(); 
-            this._dataBaseAccess = new DataBaseAccess();
+            randNum = new Random();
+            this._dataBaseAccess = dba;
 
         }
         // overload constructor that is called as the first constructor or the first game after compilation
@@ -38,7 +38,7 @@ namespace Rock_Paper_Scissors_Demo1
             currentGame.Player2 = player;
         }
 
-        internal List<Player> GetAllPlayers()
+        public List<Player> GetAllPlayers()
         {
             //List<Player> players = this._dataBaseAccess.GetAllPlayers();
             List<Player> players = new List<Player> ();
@@ -47,7 +47,7 @@ namespace Rock_Paper_Scissors_Demo1
             return players;
         }
 
-        internal List<Game> PrintUsersGames()
+        public List<Game> PrintUsersGames()
         {
             return games.Where(x => x.Player2.Fname == this.currentLoggedInPlayer.Fname 
             && x.Player2.Lname == this.currentLoggedInPlayer.Lname).ToList();
@@ -60,7 +60,7 @@ namespace Rock_Paper_Scissors_Demo1
         /// </summary>
         /// <param name="userFName"></param>
         /// <param name="userLName"></param>
-        internal void Login(string userFName, string userLName)
+        public void Login(string userFName, string userLName)
         {
             //throw new NotImplementedException("Hey, dinkus... make a body for game.login()");
             //foreach (Player p in players)
@@ -82,6 +82,7 @@ namespace Rock_Paper_Scissors_Demo1
                 this.currentLoggedInPlayer = p;
             }
         }
+        
         /// <summary>
         /// This method will create a new game with the 
         /// currentLoggedinPlayer as P2 and the computer as P1.
@@ -109,7 +110,7 @@ namespace Rock_Paper_Scissors_Demo1
         /// This method will set the currentloggedinplayer and current game to null.
         /// ready to start another game.
         /// </summary>
-        internal void ResetGame()
+        public void ResetGame()
         {
             this.currentGame = null;
             this.currentLoggedInPlayer = null;
@@ -220,7 +221,7 @@ namespace Rock_Paper_Scissors_Demo1
         /// This method returns how many rounds the computer won.
         /// </summary>
         /// <returns></returns>
-        internal int GetComputerWins()
+        public int GetComputerWins()
         {
             int compWins = 0;
             foreach (Round r in currentGame.Rounds)
@@ -234,7 +235,7 @@ namespace Rock_Paper_Scissors_Demo1
         /// This method returns how many rounds the user won.
         /// </summary>
         /// <returns></returns>
-        internal int GetUserWins()
+        public int GetUserWins()
         {
             int userWins = 0;
             foreach (Round r in currentGame.Rounds)
@@ -248,7 +249,7 @@ namespace Rock_Paper_Scissors_Demo1
         /// This method returns how many rounds were a tie.
         /// </summary>
         /// <returns></returns>
-        internal int GetTies()
+        public int GetTies()
         {
             int ties = 0;
             foreach (Round r in currentGame.Rounds)
