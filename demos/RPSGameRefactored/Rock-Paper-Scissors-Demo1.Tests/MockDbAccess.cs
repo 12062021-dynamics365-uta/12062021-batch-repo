@@ -9,6 +9,11 @@ namespace Rock_Paper_Scissors_Demo1.Tests
 {
     internal class MockDbAccess : IDataBaseAccess
     {
+
+        //public MockDbAccess()
+        //{
+
+        //}
         public List<Player> GetAllPlayers()
         {
             List<Player> players = new List<Player>();
@@ -21,14 +26,14 @@ namespace Rock_Paper_Scissors_Demo1.Tests
             };
             Player p2 = new Player()
             {
-                Fname = "jimmy",
+                Fname = "jammy",
                 Lname = "Jones",
                 Losses = 2,
                 Wins = 21
             };
             Player p3 = new Player()
             {
-                Fname = "jimmy",
+                Fname = "jemmy",
                 Lname = "Jones",
                 Losses = 2,
                 Wins = 21

@@ -22,7 +22,6 @@ namespace Rock_Paper_Scissors_Demo1
             games = new List<Game>();
             randNum = new Random();
             this._dataBaseAccess = dba;
-
         }
         // overload constructor that is called as the first constructor or the first game after compilation
         public GamePlayLogic(string fname, string lname)
@@ -40,10 +39,8 @@ namespace Rock_Paper_Scissors_Demo1
 
         public List<Player> GetAllPlayers()
         {
-            //List<Player> players = this._dataBaseAccess.GetAllPlayers();
             List<Player> players = new List<Player> ();
             players = this._dataBaseAccess.GetAllPlayers();
-            
             return players;
         }
 
