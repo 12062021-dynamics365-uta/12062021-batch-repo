@@ -130,3 +130,219 @@ console.log(stringyMark.toUpperCase());
 console.log(JSON.parse(stringyMark));
 
 
+// Day 2 functions, classes, AJAX (XMLHttpRequest and Fetch())
+
+// functions have a signature
+// this is a funciton declaration
+// no return type no type for on parameters.
+function doubles() {
+  return 5;
+}
+
+let result = doubles();
+console.log(`The result of doubles is => ${result}`);
+
+
+function doubles1(param1 = 10, ...arr) {
+  return arr[2];
+}
+
+result = doubles1(11, 12, 13, 14);
+console.log(`The result of doubles1 is => ${result}`);
+
+//function expression
+let doubles3 = function (param1) {
+  return param1;
+}
+
+console.log(doubles3('Mark'));
+
+//first-class function example
+let doubles3Copy = doubles3;
+console.log(doubles3Copy('Arely'));
+console.log(doubles3('Maya'));
+
+//callback function
+let doubles4 = function (n, myFunc, param3, param4) {
+  for (let m = 0; m <= n;m++){
+    myFunc(param3, param4);
+ } 
+}
+//console.log(doubles4);
+
+//this will be sent to doubles4
+function doubles5() {
+  console.log("This is doubles 5");
+}
+
+// this is doubles 5 as an 'arrow function'
+let doubles6 = () => console.log("This is doubles 6");
+let doubles7 = (param1) => console.log(`This is doubles 7 and the args was ${arg1}`);
+let doubles8 = (param1, param2) => console.log(`This is doubles 8 and the args were ${param1}, ${param2}`);
+
+// this is a 'callback function'
+doubles4(5, doubles8, "timey-wimey", 100);
+
+//Immediately Invoked Funciton expressions!!!!!
+// this iife returns a function after writing to the console.
+let iifeFunc = (function(){
+  console.log(`This is an IIFE`)
+  return function (param1) {
+    return param1 * param1;
+  }
+})();
+
+//then we can envoke the returned function.,
+console.log(iifeFunc(5));
+
+// closure and scope
+function doubles9() {
+  let mySentence = '';
+  return function (param1) {
+    mySentence+= ' ' + param1
+    return mySentence;
+  }
+}
+
+let doubles10 = doubles9();
+console.log(doubles10);
+console.log(doubles10('This'));
+console.log(doubles10('is'));
+console.log(doubles10('an'));
+console.log(doubles10('example'));
+console.log(doubles10('of'));
+console.log(doubles10('closure.'));
+
+try {
+  // throw new Error("This is an example of a try catch");
+  throw new UserException('InvalidMonthNo');
+}
+catch (e){
+  console.error(`This is the catch block ${e.message}`)
+}
+
+// function UserException(message) {
+//   this.message = message;
+//   this.name = 'UserException';
+// }
+// function getMonthName(mo) {
+//   mo = mo - 1; // Adjust month number for array index (1 = Jan, 12 = Dec)
+//   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
+//     'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+//   if (months[mo] !== undefined) {
+//     return months[mo];
+//   } else {
+//     throw new UserException('InvalidMonthNo');
+//   }
+// }
+
+// try {
+//   // statements to try
+//   var myMonth = 15; // 15 is out of bound to raise the exception
+//   var monthName = getMonthName(myMonth);
+// } catch (e) {
+//   monthName = 'unknown';
+//   console.error(e.message, e.name); // pass exception object to err handler
+// }
+// finally {
+//   console.log("this is the finally block")
+// }
+
+
+console.log("Still running....")
+let userName = 'Mark';
+localStorage.setItem("username", userName);
+let retreivedUsername = localStorage.getItem('username');
+console.log(`This is the username ${retreivedUsername}`)
+
+let userName1 = 'moore';
+sessionStorage.setItem("username", userName1);
+let retreivedUsername1 = sessionStorage.getItem('username');
+console.log(`This is the username ${retreivedUsername1}`)
+
+let markGuy = {name:'Mark', lname:'Moore', age: 42}
+sessionStorage.setItem('loggedInUser', JSON.stringify(markGuy));// you must json.stringify when storing an object
+let retrievedUser = sessionStorage.getItem('loggedInUser');
+console.log(JSON.parse(retrievedUser).age);// you must json.parse an object to me able to access it through dot notation.
+
+
+//OBJECTS!!!!!!
+
+let markGuy1 = { name: 'Mark', age: 42 }// object literal
+console.log(markGuy1.age);
+
+//use a function to return an object
+function markGuyFunc(fname, age) {
+  return {
+    fname:fname,
+    age:age
+  }
+}
+//create multiples of the object as needed
+let markGuy2 = markGuyFunc('Ethan', 16);
+console.log(markGuy2);
+
+markGuy1.lname = 'Moore';
+console.log(markGuy1.lname);
+
+// markGuy1.marksFuncy = () => "THis is the new function for markguy1"
+markGuy1.marksFuncy = function(){
+  return "This is the new function for markguy1"
+} 
+console.log(markGuy1.marksFuncy());
+
+console.log('fullname' in markGuy1);// you can query to see if a property exists on an object
+
+//CLASSES!!!!!
+class childlessCouple{
+  // you don't create properties in the class....
+  // you do that in the constructor.
+  constructor(dad, mom) {
+    // you have to use the 'this' keyword to specify that you
+    // are creating these props on THIS class.
+    this.dad = dad;
+    this.mom = mom;
+  }
+
+  sayItLoud() {
+    return `${cc.mom} loves ${cc.dad}`
+  }
+
+  //getter and setter
+  // use the 'get' keyword. this LOOKS like a function (and it is), 
+  // but you access the contents like a property
+  get listOfFamily() {
+    return `the parents are ${this.dad} and ${this.mom}`;
+  }
+
+  set familyMotto(value) {
+    this.motto = value;
+  }
+}
+
+let cc = new childlessCouple('chachi', 'jonie');
+console.log(`${cc.mom} loves ${cc.dad}`);
+console.log(cc.sayItLoud())
+console.log(cc.listOfFamily);// access the getter prop.
+cc.familyMotto ='We are ffaaamily';
+console.log(cc.motto);
+
+class family extends childlessCouple{
+  constructor(dad, mom, ...children) {
+    super(dad, mom);// call the parent constructor
+    this.children = children// store the children into the class array
+  }
+
+  get listOfChildren() {
+    let listOfChildrenString = '';
+    this.children.forEach((value, index) => listOfChildrenString += (`Child ${index+1} is ${value}.\n`));
+    return listOfChildrenString
+  }
+}
+let fam = new family('Robert','Darlene','Matthew','Libby','Mike','Mark','Bethany');
+
+console.log(fam.listOfChildren);
+
+
+
+
