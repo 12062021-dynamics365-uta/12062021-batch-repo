@@ -40,20 +40,20 @@ let myDiv = document.createElement('div');
 let myPara = document.createElement('p');
 
 fiveJokeButton.onclick = () => {
-  fetch(`http://api.icndb.com/jokes/5`)
+  fetch(`http://api.icndb.com/joke/5`)
     .then((res, err) => {
-      if(err){
-        console.log(`There was an error in the request ${err}`)
-      }
-      else {
-        console.log(`the response is ${res.responseText}`);
-        //code to render the joke only to the browser.
-        document.body.appendChild(myDiv);
-        myDiv.innerHTML = '';
-        myDiv.appendChild(myPara);
-        return res.json();
-      }
+      // if(err){
+      //   console.log(`There was an error in the request ${err}`)
+      // }
+      // else {
+      console.log(`the response is ${res.responseText}`);
+      //code to render the joke only to the browser.
+      document.body.appendChild(myDiv);
+      myDiv.innerHTML = '';
+      myDiv.appendChild(myPara);
+      return res.json();
+      //}
     })
     .then(res => myPara.innerText = res.value.joke)
-  // .catch()
+    .catch(err => console.log(`THIS IS THE .CATCH()`));
 }
