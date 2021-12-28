@@ -1,6 +1,7 @@
 ﻿using System;
 using Xunit;
 using System.Collections.Generic;
+
 namespace _3_DataTypeAndVariablesChallenge.Tests
 {
     public class ProgramTest

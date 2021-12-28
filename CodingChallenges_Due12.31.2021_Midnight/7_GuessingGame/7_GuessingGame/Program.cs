@@ -46,6 +46,12 @@ namespace _7_GuessingGameChallenge
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// This method offers the user the chance to play again. 
+        /// It returns true if they want to play again and false if they do not.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public static bool PlayGameAgain()
         {
             throw new NotImplementedException();

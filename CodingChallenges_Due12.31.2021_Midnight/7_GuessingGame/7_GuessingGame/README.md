@@ -17,5 +17,5 @@
  # Note 
  - Make sure to follow SOLID Principles.
  - This game will require the Random Class ('System' Namespace) - https://docs.microsoft.com/en-us/dotnet/api/system.random?view=netcore-3.1
- - It is not best practice to have user interaction within a method, but we are doing it here to allow testing.
+ - It is not best practice to have user interaction within a method, but we are allowing it here to allow testing.
  - EVERY method is called in Main() and returns to Main().

@@ -22,7 +22,7 @@ namespace StringManipulationChallenge
         /// <returns></returns>
         public static string StringToUpper(string usersString)
         {
-            throw new NotImplementedException("StringToUpper method not implemented.");
+            zthrow new NotImplementedException("StringToUpper method not implemented.");
         }
 
         /// <summary>
