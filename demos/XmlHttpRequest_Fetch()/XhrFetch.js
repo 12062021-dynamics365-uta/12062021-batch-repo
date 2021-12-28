@@ -37,23 +37,32 @@ let fiveJokeButton = document.createElement('button');
 document.body.appendChild(fiveJokeButton);
 fiveJokeButton.innerText = `Click to get 5 Chuck Norris jokes`;
 let myDiv = document.createElement('div');
-let myPara = document.createElement('p');
+// let myPara = document.createElement('p');
 
 fiveJokeButton.onclick = () => {
-  fetch(`http://api.icndb.com/joke/5`)
-    .then((res, err) => {
-      // if(err){
+  fetch(`https://api.icndb.com/jokes/random/5`)
+    .then(response => {
+      //chuck only sends OK as the response!
+      // if(!response.ok){
       //   console.log(`There was an error in the request ${err}`)
       // }
-      // else {
-      console.log(`the response is ${res.responseText}`);
-      //code to render the joke only to the browser.
-      document.body.appendChild(myDiv);
-      myDiv.innerHTML = '';
-      myDiv.appendChild(myPara);
-      return res.json();
-      //}
+      return response.json();//parse the response so you can access it in the next .then()
     })
-    .then(res => myPara.innerText = res.value.joke)
+  .then(response => {
+    //code to render the joke only to the browser.
+    document.body.appendChild(myDiv);
+    myDiv.innerHTML = '';//delete whatever is int he <div> currently.
+    //loop over the jokes to append each new <p> to the <div>
+    for (let i = 0; i < response.value.length;i++){
+      let myPara = document.createElement('p');
+      myPara.innerText += response.value[i].joke;
+      myDiv.appendChild(myPara);
+    }
+    })
+    /**because icndb only sends OK as the value of response.ok, you have to keep your catch
+    * here at the bottom to catch error caused by reading undefined values 
+    * in the response object
+    * I assume this is an inside joke...because Chuck Norris is NEVER !response.ok.
+    */
     .catch(err => console.log(`THIS IS THE .CATCH()`));
 }
