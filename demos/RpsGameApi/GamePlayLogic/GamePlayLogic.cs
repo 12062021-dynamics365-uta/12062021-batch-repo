@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GamePlayLogic
+namespace GamePlayLogic1
 {
-    public class GamePlayLogic
+    public class GamePlayLogic : IGamePlayLogic
     {
         List<Player> players;// all the registered players
         List<Game> games;// all the played games
@@ -38,8 +38,13 @@ namespace GamePlayLogic
             currentGame.Player2 = player;
         }
 
+        /// <summary>
+        /// This method will call the databaseaccess method to get the list of all the players.
+        /// </summary>
+        /// <returns></returns>
         public List<Player> GetAllPlayers()
         {
+            // to test THIS method (not the databaseaccess methods) we need to mock databaseaccess for testing
             List<Player> players = new List<Player>();
             players = this._dataBaseAccess.GetAllPlayers();
             return players;

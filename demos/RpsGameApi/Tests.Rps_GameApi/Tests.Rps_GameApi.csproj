@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataBaseAccess\DataBaseAccess1.csproj" />
-    <ProjectReference Include="..\GamePlayLogic\GamePlayLogic.csproj" />
+    <ProjectReference Include="..\GamePlayLogic\GamePlayLogic1.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\Rps_GameApi\Rps_GameApi.csproj" />
   </ItemGroup>
