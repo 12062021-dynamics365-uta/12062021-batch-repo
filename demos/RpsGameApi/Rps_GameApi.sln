@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rps_GameApi", "Rps_GameApi\Rps_GameApi.csproj", "{96D56B62-DE14-4C8E-BC35-B54736CA88B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamePlayLogic", "GamePlayLogic\GamePlayLogic.csproj", "{09052124-8BF8-4B54-874D-DB8C3A4FC4CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamePlayLogic1", "GamePlayLogic\GamePlayLogic1.csproj", "{09052124-8BF8-4B54-874D-DB8C3A4FC4CB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBaseAccess1", "DataBaseAccess\DataBaseAccess1.csproj", "{E2DBB01B-399E-48A0-ADD5-D48A5CE04BF4}"
 EndProject

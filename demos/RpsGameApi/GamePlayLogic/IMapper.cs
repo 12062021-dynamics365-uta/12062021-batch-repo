@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GamePlayLogic
+namespace GamePlayLogic1
 {
-    internal interface IMapper
+    public interface IMapper
     {
         List<Player> EntityToPlayerList(SqlDataReader dr);
     }

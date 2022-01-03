@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GamePlayLogic
+namespace GamePlayLogic1
 {
-    internal interface IGamePlayLogic
+    public interface IGamePlayLogic
     {
         Player WinnerYet();
         List<Player> GetAllPlayers();
