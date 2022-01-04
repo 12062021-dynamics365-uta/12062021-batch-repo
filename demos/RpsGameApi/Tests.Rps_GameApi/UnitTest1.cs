@@ -13,9 +13,11 @@ namespace Tests.Rps_GameApi
         public void Test1()
         {
             //arrange
-            //because of Dependency Inversion, you can create a rando class tha timplements the correct interface
+            //because of Dependency Inversion, you can create a rando class that implements
+            //the correct interface required in the constructor of the class under test.
             IDatabaseAccess mockDbAccess = new MockDatabaseAccess();
-            //THEN, use the "correct interface" implementing class that implements those methods differently
+            //THEN, create an instnce of the class under test with the mockclass as a dependency
+            //this allows you to 
             GamePlayLogic gpl = new GamePlayLogic(mockDbAccess);
 
             //act
