@@ -12,7 +12,7 @@ namespace GamePlayLogic1
         Player WinnerYet();
         List<Player> GetAllPlayers();
         List<Game> PrintUsersGames();
-        void Login(string userFName, string userLName);
+        Task<Player> LoginAsync(string userFName, string userLName);
         void StartNewGame();
         void ResetGame();
         Choice ValidateUserChoice(string choice);
@@ -22,6 +22,6 @@ namespace GamePlayLogic1
         int GetUserWins();
         int GetTies();
         int GetNumRounds();
-
+        Task<Player> RegisterNewPlayerAsync(string fname, string lname);
     }
 }

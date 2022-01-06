@@ -1,32 +1,29 @@
-﻿using Models;
+﻿using GamePlayLogic1;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GamePlayLogic1
+namespace Tests.Rps_GameApi
 {
-    public class Mapper : IMapper
+    internal class MockMapper : IMapper
     {
         public Player EntityToPlayer(SqlDataReader dr)
         {
             //call the dr.Read() method to get the entity returned
-            if (dr.Read())
+            //if (dr.Read())
+            //{
+            Player p = new Player()
             {
-                Player p = new Player()
-                {
-                    PlayerId = Convert.ToInt32(dr[0]),
-                    Fname = Convert.ToString(dr[1]),
-                    Lname = Convert.ToString(dr[2]),
-                    Losses = Convert.ToInt32(dr[3]),
-                    Wins = Convert.ToInt32(dr[4])
-                };
-                dr.Close();
-                return p;
-            }
-            else return null;
+                PlayerId = 21,
+                Fname = "mumbly",
+                Lname = "jumbly",
+                Losses = 11,
+                Wins = 12
+            };
+            return p;
+            //}
+            //else return null;
         }
 
         /// <summary>
@@ -37,6 +34,7 @@ namespace GamePlayLogic1
             List<Player> players = new List<Player>();
             while (dr.Read())
             {
+                //Console.WriteLine(dr[0].ToString() + " " + dr[1].ToString() + "  " + dr[2].ToString() + "  " + dr[3].ToString() + "  " + dr[4].ToString());
                 Player p = new Player()
                 {
                     PlayerId = Convert.ToInt32(dr[0].ToString()),
@@ -46,9 +44,12 @@ namespace GamePlayLogic1
                     Losses = Convert.ToInt32(dr[4].ToString()),
                 };
                 players.Add(p);
+
             }
             return players;
+
         }
 
-    }
-}
+
+    }//EoC
+}//EoN

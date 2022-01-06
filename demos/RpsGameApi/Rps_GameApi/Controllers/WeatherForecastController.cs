@@ -58,7 +58,5 @@ namespace Rps_GameApi.Controllers
                 return Conflict(p);
             }
         }
-
-
-    }
+        }
 }

@@ -3,7 +3,9 @@ using DataBaseAccess1;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GamePlayLogic1
 {
@@ -15,14 +17,15 @@ namespace GamePlayLogic1
         private Game currentGame;
         private Player currentLoggedInPlayer;
         private readonly IDatabaseAccess _dataBaseAccess;
-
+        private readonly IMapper _mapper;
         //constructor
-        public GamePlayLogic(IDatabaseAccess dba)
+        public GamePlayLogic(IDatabaseAccess dba, IMapper mapper)
         {
             players = new List<Player>();
             games = new List<Game>();
             randNum = new Random();
             this._dataBaseAccess = dba;
+            this._mapper = mapper;  
         }
         // overload constructor that is called as the first constructor or the first game after compilation
         public GamePlayLogic(string fname, string lname)
@@ -63,27 +66,32 @@ namespace GamePlayLogic1
         /// </summary>
         /// <param name="userFName"></param>
         /// <param name="userLName"></param>
-        public void Login(string userFName, string userLName)
+        public async Task<Player> LoginAsync(string fname, string lname)
         {
-            //throw new NotImplementedException("Hey, dinkus... make a body for game.login()");
-            //foreach (Player p in players)
+            //call the DbAccess method to get the user with these credentials
+            // if non null result, then the player is returned to the client
+            SqlDataReader dr = await _dataBaseAccess.LoginAsync(fname, lname);
+
+            //run the return through the mapper to return a Player (or null)
+            Player p = _mapper.EntityToPlayer(dr);
+
+            return p;
+
+            #region this region hold old code
+            // cant use this bc state can't be helo in the API (thats what the DB is for)
+            //Player p = players.Where(p => p.Fname == userFName && p.Lname == userLName).FirstOrDefault();
+
+            //if (p == null)
             //{
-            //    if (p.Fname == userFName && p.Lname == userLName) this.currentLoggedInPlayer = p;
+            //    Player p1 = new Player(userFName, userLName);
+            //    this.currentLoggedInPlayer = p1;
+            //    players.Add(p1);
             //}
-
-            Player p = players.Where(p => p.Fname == userFName && p.Lname == userLName).FirstOrDefault();
-
-            if (p == null)
-            {
-                Player p1 = new Player(userFName, userLName);
-                this.currentLoggedInPlayer = p1;
-                players.Add(p1);
-                //this.currentGame.Player2 = p1;
-            }
-            else
-            {
-                this.currentLoggedInPlayer = p;
-            }
+            //else
+            //{
+            //    this.currentLoggedInPlayer = p;
+            //}
+            #endregion
         }
 
         /// <summary>
@@ -269,6 +277,25 @@ namespace GamePlayLogic1
         public int GetNumRounds()
         {
             return this.currentGame.Rounds.Count;
+        }
+
+        public async Task<Player> RegisterNewPlayerAsync(string fname, string lname)
+        {
+            //call the DbAccess layer to register this player
+            //neither can be emkpty strings
+            if (fname != "" && lname != "")
+            {
+                Player player = await this._dataBaseAccess.RegisterNewPlayerAsync(fname, lname);
+                if (player != null)
+                {
+                    return player;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            return null;
         }
     }
 }
