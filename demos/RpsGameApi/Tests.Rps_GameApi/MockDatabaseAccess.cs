@@ -2,6 +2,7 @@
 using Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,16 @@ namespace Tests.Rps_GameApi
             players.Add(p2);
             players.Add(p3);
             return players;
+        }
+
+        public Task<SqlDataReader> LoginAsync(string fname, string lname)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Player> RegisterNewPlayerAsync(string fname, string lname)
+        {
+            throw new NotImplementedException();
         }
     }
 }
