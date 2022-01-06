@@ -41,6 +41,7 @@ namespace Rps_GameApi.Controllers
         [Route("mumblyjumbly/{fname}/{lname}")]
         public IActionResult MyDemoMethod(string fname, string lname)
         {
+            this._logger.LogInformation("this is the log information inside MyDemoMethod");
             return NotFound($"Congrats you, {fname} {lname}, got to the new method!");
         }
 
