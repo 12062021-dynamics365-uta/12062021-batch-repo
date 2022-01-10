@@ -1,59 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace CodeAssignment
+namespace SweetnSaltyConsole
 {
     class Program
     {
+        // print sweet of multiples of 3
+        // print salty for multiples of 5
+        // print sweetNSalty for multipes of 3 and 5
         static void Main(string[] args)
         {
-            int min = 1;
-            int max = 1000;
-            int rows, cols = 1;
+            int sweet = 0;
+            int salty = 0;
+            int sweetNSalty = 0;
 
-            // iteriate through a max value of a 1000
-            for (int i = 1; i <= max; i++)
+
+            // loop through from 1 - 1000 and print the results to the console
+            for (int i = 1; i <= 1000; i++)
             {
-                //if divisble by 20 print all number and space after 20
-                if (i % 20 == 0)
-                {
-                    Console.Write(i + " ");
 
-                }
-                string swee = "sweet";
-                //print sweet if the number is divisble by 3
-                if (i % 3 == 0)
-                {
-                    Console.Write(swee);
-
-                }
-                //print "salty" if the number is  divisble by 5
-                if (i % 5 == 0)
-                {
-
-                    Console.Write("salty");
-
-                }
-                // print "sweet'nSalty" if divisible by 3 and 5
                 if (i % 3 == 0 && i % 5 == 0)
                 {
-                    Console.Write("sweet'nSalty");
+                    Console.WriteLine(i + " sweetNSalty");
+                    sweetNSalty++;
+                }
+                else if (i % 3 == 0)
+                {
+                    Console.WriteLine(i + " sweet");
+                    sweet++;
+                }
+                else if (i % 5 == 0)
+                {
+                    Console.WriteLine(i + " salty");
+                    salty++;
                 }
 
-
-
+                // only print number that have assigned value sweet, salty, sweetNSalty
                 else
                 {
-                    Console.Write(i);
                 }
-
-
 
 
 
 
             }
-
+            Console.WriteLine("The sweet count is " + sweet);
+            Console.WriteLine("The salty count is " + salty);
+            Console.WriteLine("The sweetNSalty count is " + sweetNSalty);
         }
     }
 }
