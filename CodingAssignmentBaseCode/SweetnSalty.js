@@ -1,24 +1,55 @@
-var countSweet = 0, countSalty = 0, countSnS = 0;
-var concatString = "";
-for(let i = 1; i <= 1000; i++) {
-    if(i%3 == 0 && i%5 == 0) {
-        concatString += "sweet'nSalty "; //add SnS to concatenated string
-        countSnS++;
-    }
-    else if(i%3 == 0) {
-        concatString += "sweet "; //add sweet to concatenated string
-        countSweet++;
-    }
-    else if(i%5 == 0){
-        concatString += "salty "; //add salty to concatenated string
-        countSalty++;
-    }
-    else
-        concatString += i + " "; //add number to concatenated string
-    if (i % 20 == 0){   
-        console.log(concatString);  //print concatenated string after 20
-        concatString = "";          //reset concatenated string for next line of 20
-    }
-    //concatString += " ";
+var console = {};
+console.log = function () { };
+window.console = console;
+
+// let GameProgression  = document.createElement('h1');
+// document.body.appendChild(GameProgression);
+// GameProgression.innerText = 'GAME PROGRESSION';
+
+// let outputElement = document.createElement("input");
+// document.body.appendChild(outputElement);
+
+
+
+// let btn = document.createElement("button");
+// document.body.appendChild(btn);
+// btn.innerHTML = "CLICK ME";
+// outputElement.type="submit";
+// outputElement.name="PRESS ENTER";
+
+
+var thirArr = new Array(1000);
+var myVar = document.createElement('i');
+document.body.appendChild(myVar);
+
+var s = '';
+var sweet = 'sweet';
+
+
+var count = 0;
+for (var i = 0; i <= thirArr.length; i++) {
+
+
+  myVar.innerHTML += i + " ";
+
+
+  if (i % 3 == 0) {
+    myVar.innerHTML += 'salty';
+
+  }
+  if (i % 5 == 0) {
+
+    myVar.innerHTML += sweet;
+
+
+  }
+  if (i % 3 == 0 && i % 3 == 0) {
+    //myVar.style.color += 'red';
+    myVar.innerHTML += 'sweetnSalty';
+
+  }
+  if (i % 40 == 0) {
+    myVar.innerHTML += "<br>";
+  }
+
 }
-console.log("\nSweet: " + countSweet + "\nSalty: " + countSalty + "\nSweet'nSalty: " + countSnS);
