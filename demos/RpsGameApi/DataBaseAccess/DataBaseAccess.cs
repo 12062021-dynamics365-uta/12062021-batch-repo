@@ -48,7 +48,7 @@ namespace DataBaseAccess1
                 SqlDataReader dr = await cmd.ExecuteReaderAsync();
 
                 //players = this._mapper.EntityToPlayerList(dr);
-                //this._con.Close();// make sure this class is Transient... not songleton or Scoped.
+                //this._con.Close();// make sure this class is Transient... not singleton or Scoped.
                 return dr;
             }
         }
@@ -68,7 +68,7 @@ namespace DataBaseAccess1
                 try
                 {
                     await cmd.ExecuteNonQueryAsync();
-                    return new Player() { Fname = fname, Lname = lname, Losses=5, Wins=100 };
+                    return new Player() { Fname = fname, Lname = lname, Losses = 5, Wins = 100 };
                     //TODO return this.GetAllPlayers(fname,lname);// create the method to get one player
                 }
                 catch (DbException ex)// TODO do something with this exception

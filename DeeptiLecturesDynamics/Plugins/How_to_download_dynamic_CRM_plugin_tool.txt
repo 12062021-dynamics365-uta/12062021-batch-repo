@@ -1,0 +1,5 @@
+1) create folder in d :  folder name tool
+2) open powershell and change drive d:\tool
+3) copy the code from plugin powershell txt file and paste it in powershell
+4)when execution complete close powershell
+5) then go to d:\tool folder and open plugin tool
